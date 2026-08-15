@@ -55,3 +55,10 @@ This is a REST API used for managing student records. It is built with Node.js a
      }
  }
 ```
+
+## Installation and Setup
+- Clone the GitHub repository: `git clone https://github.com/Danbaba1/Student-API.git`
+- Enter the directory: `cd Student-API`
+- Install the dependencies: `npm install`
+- Start the server: `npm run dev`
+- The API will run at: `localhost:3000/students`
