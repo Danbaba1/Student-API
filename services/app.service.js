@@ -30,4 +30,17 @@ export class StudentService {
         this.students.push(student);
         return student;
     }
+
+    async updateStudent(studentData, id) {
+        const student = await this.getStudentById(id);
+
+        if (!student) {
+            return undefined;
+        }
+
+        student.name = studentData.name ? studentData.name : student.name;
+        student.course = studentData.course ? studentData.course : student.course;
+
+        return student;
+    }
 }
