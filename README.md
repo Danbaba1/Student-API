@@ -88,6 +88,23 @@ This is a REST API used for managing student records. It is built with Node.js a
 }
 ```
 
+### Delete Student
+
+- **Method:** `DELETE`
+- **Endpoint:** `/students/:id`
+- **Response:**
+
+```json
+{
+  "message": "Student deleted successfully",
+  "student": {
+    "id": 1,
+    "name": "Daniel",
+    "course": "Computer Science"
+  }
+}
+```
+
 ## Installation and Setup
 
 - Clone the GitHub repository: `git clone https://github.com/Danbaba1/Student-API.git`

@@ -137,4 +137,36 @@ export class StudentController {
             });
         }
     }
+
+    async deleteStudent(req, res) {
+        try {
+            const { id } = req.params;
+
+            if (Number.isNaN(Number(id))) {
+                return res.status(400).json({
+                    message: "Invalid ID"
+                });
+            }
+
+            const student = await studentService.deleteStudent(id);
+
+            if (student === undefined) {
+                return res.status(404).json({
+                    message: "Student not found"
+                });
+            }
+
+            return res.status(200).json({
+                message: "Student deleted successfully",
+                student
+            });
+
+        } catch (error) {
+            console.log(error);
+
+            return res.status(500).json({
+                message: "Failed to delete student"
+            });
+        }
+    }
 }

@@ -43,4 +43,18 @@ export class StudentService {
 
         return student;
     }
+
+    async deleteStudent(id) {
+        const student = await this.getStudentById(id);
+
+        if (!student) {
+            return undefined;
+        }
+
+        const index = this.students.findIndex((student) => Number(id) === student.id);
+
+        const deletedStudents = this.students.splice(index, 1);
+
+        return deletedStudents[0];
+    }
 }
