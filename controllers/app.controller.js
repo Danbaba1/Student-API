@@ -16,7 +16,7 @@ export class StudentController {
 
             return res.status(500).json({
                 message: "Failed to fetch students"
-            })
+            });
         }
     }
 
@@ -43,7 +43,7 @@ export class StudentController {
                 student
             });
         } catch (error) {
-            console.log(error);
+            console.error(error);
 
             return res.status(500).json({
                 message: "Failed to fetch student"
@@ -73,7 +73,7 @@ export class StudentController {
                 student
             });
         } catch (error) {
-            console.log(error);
+            console.error(error);
 
             return res.status(500).json({
                 message: "Failed to create student"
@@ -127,10 +127,10 @@ export class StudentController {
             return res.status(200).json({
                 message: "Student updated successfully",
                 updatedStudent
-            })
+            });
 
         } catch (error) {
-            console.log(error);
+            console.error(error);
 
             return res.status(500).json({
                 message: "Failed to update student"
@@ -162,7 +162,7 @@ export class StudentController {
             });
 
         } catch (error) {
-            console.log(error);
+            console.error(error);
 
             return res.status(500).json({
                 message: "Failed to delete student"
