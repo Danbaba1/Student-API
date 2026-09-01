@@ -112,3 +112,18 @@ This is a REST API used for managing student records. It is built with Node.js a
 - Install the dependencies: `npm install`
 - Start the server: `npm run dev`
 - The API will run at: `http://localhost:3000/students`
+
+## Testing
+
+- To run the test: `npm test`
+- To run the test coverage: `npm test -- --coverage`
+  | Category | Statements | Branches | Functions | Lines |
+  |-------------|:----------:|:--------:|:---------:|:-----:|
+  | All files | 100% | 100% | 100% | 100% |
+  | controllers | 100% | 100% | 100% | 100% |
+  | services | 100% | 100% | 100% | 100% |
+
+  | Metric      |        Result        |
+  | ----------- | :------------------: |
+  | Test Suites |  2 passed / 2 total  |
+  | Tests       | 41 passed / 41 total |

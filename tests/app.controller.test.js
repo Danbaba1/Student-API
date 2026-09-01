@@ -282,6 +282,81 @@ test('should return 400 when there is a white-space', async () => {
     });
 });
 
+test('should not include digits', async () => {
+    const controller = new StudentController();
+    const res = createMockResponse();
+
+    const req = {
+        body: {
+            name: "John3",
+            course: "Physics"
+        }
+    }
+
+    await controller.createStudent(req, res);
+
+    expect(createStudent).not.toHaveBeenCalled();
+
+    expect(res.status).toBeCalledWith(400);
+
+    expect(res.json).toBeCalledWith({
+        message: "Bad request"
+    });
+});
+
+test('should not include multiple whitespaces between words', async () => {
+    const controller = new StudentController();
+    const res = createMockResponse();
+
+    const req = {
+        body: {
+            name: "John  Smith",
+            course: "Physics"
+        }
+    }
+
+    await controller.createStudent(req, res);
+
+    expect(createStudent).not.toHaveBeenCalled();
+
+    expect(res.status).toBeCalledWith(400);
+
+    expect(res.json).toBeCalledWith({
+        message: "Bad request"
+    });
+});
+
+test('should accept a single whitespace between two words', async () => {
+    const student = {
+        "id": 3,
+        "name": "John Smith",
+        "course": "Physics"
+    };
+
+    const controller = new StudentController();
+    const res = createMockResponse();
+
+    const req = {
+        body: {
+            name: "John Smith",
+            course: "Physics"
+        }
+    }
+
+    createStudent.mockResolvedValue(student);
+
+    await controller.createStudent(req, res);
+
+    expect(createStudent).toHaveBeenCalledWith(req.body.name, req.body.course);
+
+    expect(res.status).toBeCalledWith(201);
+
+    expect(res.json).toBeCalledWith({
+        message: "Student created successfully",
+        student
+    });
+});
+
 test('should return 200 for a successful update', async () => {
     const updatedStudent = {
         "id": 1,
@@ -503,6 +578,30 @@ test('should return 404 when the service returns undefined', async () => {
 
     expect(res.json).toBeCalledWith({
         message: "Student not found"
+    });
+});
+
+test('should return 400 for invalid names', async () => {
+    const controller = new StudentController();
+    const res = createMockResponse();
+
+    const req = {
+        params: {
+            id: 1
+        },
+        body: {
+            name: "John3"
+        }
+    }
+
+    await controller.updateStudent(req, res);
+
+    expect(updateStudent).not.toHaveBeenCalled();
+
+    expect(res.status).toBeCalledWith(400);
+
+    expect(res.json).toBeCalledWith({
+        message: "Bad request"
     });
 });
 

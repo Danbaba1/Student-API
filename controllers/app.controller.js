@@ -67,6 +67,12 @@ export class StudentController {
                 });
             }
 
+            if (!(/^[a-zA-Z'-]+(\s[a-zA-Z'-]+)*$/.test(name))) {
+                return res.status(400).json({
+                    message: "Bad request"
+                });
+            }
+
             const student = await studentService.createStudent(name, course);
             return res.status(201).json({
                 message: "Student created successfully",
@@ -111,6 +117,12 @@ export class StudentController {
             }
 
             if (studentData.name === "" || studentData.course === "") {
+                return res.status(400).json({
+                    message: "Bad request"
+                });
+            }
+
+            if (studentData.name !== undefined && !/^[a-zA-Z'-]+(\s[a-zA-Z'-]+)*$/.test(studentData.name)) {
                 return res.status(400).json({
                     message: "Bad request"
                 });
