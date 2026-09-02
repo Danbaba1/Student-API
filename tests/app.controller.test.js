@@ -357,7 +357,7 @@ test('should accept a single whitespace between two words', async () => {
     });
 });
 
-test('should return 200 for a successful update', async () => {
+test('should return 200 for a successful update with only the name', async () => {
     const updatedStudent = {
         "id": 1,
         "name": "John",
@@ -370,6 +370,39 @@ test('should return 200 for a successful update', async () => {
         },
         body: {
             name: "John"
+        }
+    }
+
+    const controller = new StudentController();
+    const res = createMockResponse();
+
+    updateStudent.mockResolvedValue(updatedStudent);
+
+    await controller.updateStudent(req, res);
+
+    expect(updateStudent).toHaveBeenCalledWith(req.body, req.params.id);
+
+    expect(res.status).toBeCalledWith(200);
+
+    expect(res.json).toBeCalledWith({
+        message: "Student updated successfully",
+        updatedStudent
+    });
+});
+
+test('should return 200 for a successful update with only the course', async () => {
+    const updatedStudent = {
+        "id": 1,
+        "name": "Daniel",
+        "course": "Physics"
+    }
+
+    const req = {
+        params: {
+            id: 1
+        },
+        body: {
+            course: "Physics"
         }
     }
 
