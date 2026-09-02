@@ -126,4 +126,4 @@ This is a REST API used for managing student records. It is built with Node.js a
   | Metric      |        Result        |
   | ----------- | :------------------: |
   | Test Suites |  2 passed / 2 total  |
-  | Tests       | 41 passed / 41 total |
+  | Tests       | 44 passed / 44 total |

@@ -24,7 +24,13 @@ export class StudentService {
     }
 
     async createStudent(name, course) {
-        const id = this.students.length + 1;
+        let id;
+        if (this.students.length !== 0) {
+            id = Math.max(...this.students.map((obj) => obj.id)) + 1;
+        } else {
+            id = 1;
+        }
+
 
         const student = { id, name, course };
         this.students.push(student);

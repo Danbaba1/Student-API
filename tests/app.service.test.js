@@ -159,3 +159,47 @@ describe('it should delete an existing student and return the deleted student', 
         });
     });
 });
+
+describe('it should not create a duplicate id after deleting a student with id 1 and creating a new student', () => {
+    test('duplicate id should not be produced after deleting student with id 1 and creating a new student', async () => {
+        const id = 1;
+        const name = "John";
+        const course = "Physics";
+        const deletedStudent = await studentService.deleteStudent(id);
+        const student = await studentService.createStudent(name, course);
+
+        expect(deletedStudent).toEqual({
+            "id": 1,
+            "name": "Daniel",
+            "course": "Computer Science"
+        });
+
+        expect(student.id).toEqual(3);
+    });
+});
+
+describe('it should assign an id 1 when creating a student for an empty array', () => {
+    test('an id 1 should be assigned when creating a student for an empty array', async () => {
+        const id = 1;
+        const deletedStudent = await studentService.deleteStudent(id);
+        const secondId = 2;
+        const secondDeletedStudent = await studentService.deleteStudent(secondId);
+        const name = "John";
+        const course = "Physics";
+        const student = await studentService.createStudent(name, course);
+
+        expect(deletedStudent).toEqual({
+            "id": 1,
+            "name": "Daniel",
+            "course": "Computer Science"
+        });
+
+        expect(secondDeletedStudent).toEqual({
+            "id": 2,
+            "name": "Sarah",
+            "course": "Engineering"
+        });
+
+        expect(student.id).toEqual(1);
+    });
+});
