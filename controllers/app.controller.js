@@ -1,11 +1,13 @@
 import { StudentService } from "../services/app.service.js";
 
-const studentService = new StudentService();
-
 export class StudentController {
+    constructor(studentService = new StudentService()) {
+        this.studentService = studentService;
+    }
+
     async getStudents(req, res) {
         try {
-            const students = await studentService.getStudents();
+            const students = await this.studentService.getStudents();
 
             return res.status(200).json({
                 message: "Students returned successfully",
@@ -30,7 +32,7 @@ export class StudentController {
                 });
             }
 
-            const student = await studentService.getStudentById(id);
+            const student = await this.studentService.getStudentById(id);
 
             if (student === undefined) {
                 return res.status(404).json({
@@ -73,7 +75,7 @@ export class StudentController {
                 });
             }
 
-            const student = await studentService.createStudent(name, course);
+            const student = await this.studentService.createStudent(name, course);
             return res.status(201).json({
                 message: "Student created successfully",
                 student
@@ -128,7 +130,7 @@ export class StudentController {
                 });
             }
 
-            const updatedStudent = await studentService.updateStudent(studentData, id);
+            const updatedStudent = await this.studentService.updateStudent(studentData, id);
 
             if (!updatedStudent) {
                 return res.status(404).json({
@@ -160,7 +162,7 @@ export class StudentController {
                 });
             }
 
-            const student = await studentService.deleteStudent(id);
+            const student = await this.studentService.deleteStudent(id);
 
             if (student === undefined) {
                 return res.status(404).json({

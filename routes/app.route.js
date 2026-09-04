@@ -1,14 +1,14 @@
 import { StudentController } from "../controllers/app.controller.js";
 import express from 'express';
 
-const router = express.Router();
+export function createRouter(studentController = new StudentController()) {
+    const router = express.Router();
 
-const studentController = new StudentController();
+    router.get('/', studentController.getStudents.bind(studentController));
+    router.get('/:id', studentController.getStudentById.bind(studentController));
+    router.post('/', studentController.createStudent.bind(studentController));
+    router.patch('/:id', studentController.updateStudent.bind(studentController));
+    router.delete('/:id', studentController.deleteStudent.bind(studentController));
 
-router.get('/', studentController.getStudents);
-router.get('/:id', studentController.getStudentById);
-router.post('/', studentController.createStudent);
-router.patch('/:id', studentController.updateStudent);
-router.delete('/:id', studentController.deleteStudent);
-
-export { router };
+    return router;
+}

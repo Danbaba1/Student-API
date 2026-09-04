@@ -122,8 +122,10 @@ This is a REST API used for managing student records. It is built with Node.js a
   | All files | 100% | 100% | 100% | 100% |
   | controllers | 100% | 100% | 100% | 100% |
   | services | 100% | 100% | 100% | 100% |
+  | routes   | 100% | 100% | 100% | 100% |
+  | app      | 100% | 100% | 100% | 100% |
 
   | Metric      |        Result        |
   | ----------- | :------------------: |
-  | Test Suites |  2 passed / 2 total  |
-  | Tests       | 44 passed / 44 total |
+  | Test Suites |  4 passed / 4 total  |
+  | Tests       | 53 passed / 53 total |

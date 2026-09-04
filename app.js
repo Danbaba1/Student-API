@@ -1,11 +1,11 @@
 import express from 'express';
-import { router as studentRoutes } from './routes/app.route.js';
+import { createRouter } from './routes/app.route.js';
 
-const app = express();
+export function createApp(router = createRouter()) {
+    const app = express();
 
-app.use(express.json());
-app.use("/students", studentRoutes);
+    app.use(express.json());
+    app.use("/students", router);
 
-app.listen(3000, () => {
-    console.log('Server is running');
-});
+    return app;
+}
